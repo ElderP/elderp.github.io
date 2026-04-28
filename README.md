@@ -1,2 +1,1126 @@
-# pixelcodes
-pixelcodes
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIXEL CODES — Software de Alto Desempenho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0C0E;
+    --surface: #131316;
+    --surface2: #1A1A1F;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #F0EDE8;
+    --muted: #8A8A96;
+    --accent: #C8F047;
+    --accent2: #2EE89A;
+    --accent3: #7B8CFF;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(12,12,14,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #0C0C0E;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200,240,71,0.08);
+    border: 1px solid rgba(200,240,71,0.2);
+    color: var(--accent);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(240,237,232,0.3);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0C0C0E;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1px solid var(--border2);
+    color: var(--text);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+
+  /* STATS */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-num span { color: var(--accent); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .product-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .product-card:hover { background: var(--surface2); }
+  .product-card:hover::before { opacity: 1; }
+
+  .product-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .icon-green { background: rgba(46,232,154,0.1); border: 1px solid rgba(46,232,154,0.2); }
+  .icon-yellow { background: rgba(200,240,71,0.1); border: 1px solid rgba(200,240,71,0.2); }
+  .icon-blue { background: rgba(123,140,255,0.1); border: 1px solid rgba(123,140,255,0.2); }
+
+  .product-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .product-card p {
+    color: var(--muted);
+    font-size: 0.925rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+  }
+
+  /* FOCUS AREAS */
+  .focus-section { background: var(--surface); }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .focus-visual {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 440px;
+  }
+
+  .focus-dashboard {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .dash-title {
+    font-family: var(--font-head);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .dash-badge {
+    background: rgba(200,240,71,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(200,240,71,0.2);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .dash-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .dash-metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .dash-metric-val {
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .dash-metric-lbl {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dash-bar-group { margin-bottom: 0.75rem; }
+
+  .dash-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .dash-bar-track {
+    height: 6px;
+    background: var(--surface);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .dash-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--accent);
+    transition: width 1s ease;
+  }
+
+  .dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin-top: 1.25rem;
+  }
+
+  .dash-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 400;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.7rem;
+  }
+
+  .dash-table td {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .status-ok { background: rgba(46,232,154,0.12); color: var(--accent2); }
+  .status-warn { background: rgba(200,240,71,0.12); color: var(--accent); }
+  .status-low { background: rgba(255,80,80,0.12); color: #FF6B6B; }
+
+  .focus-content { padding: 1rem 0; }
+
+  .focus-list { list-style: none; margin-top: 1.5rem; }
+
+  .focus-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .focus-list li:last-child { border-bottom: none; }
+
+  .focus-list-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background: rgba(200,240,71,0.08);
+    border: 1px solid rgba(200,240,71,0.15);
+  }
+
+  .focus-list h4 {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .focus-list p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PROCESS */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    position: relative;
+  }
+
+  .process-step {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-right: none;
+    position: relative;
+  }
+
+  .process-step:last-child { border-right: 1px solid var(--border); }
+
+  .process-num {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(200,240,71,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .process-step h4 {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-step p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* GRANT / GANTT */
+  .gantt-section { background: var(--surface); }
+
+  .gantt-demo {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin-top: 3rem;
+  }
+
+  .gantt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .gantt-title {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .gantt-period { font-size: 0.8rem; color: var(--muted); }
+
+  .gantt-grid { min-width: 600px; }
+
+  .gantt-months {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    gap: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .gantt-month-cell {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem;
+  }
+
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    gap: 0;
+    margin-bottom: 6px;
+    align-items: center;
+  }
+
+  .gantt-label {
+    font-size: 0.78rem;
+    color: var(--text);
+    padding-right: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gantt-cells { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(6, 1fr); height: 28px; gap: 2px; }
+
+  .gantt-cell { background: var(--surface); border-radius: 3px; }
+
+  .gantt-bar {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bar-green { background: rgba(46,232,154,0.25); color: var(--accent2); border: 1px solid rgba(46,232,154,0.3); }
+  .bar-yellow { background: rgba(200,240,71,0.2); color: var(--accent); border: 1px solid rgba(200,240,71,0.25); }
+  .bar-blue { background: rgba(123,140,255,0.2); color: var(--accent3); border: 1px solid rgba(123,140,255,0.25); }
+  .bar-gray { background: rgba(138,138,150,0.15); color: var(--muted); border: 1px solid rgba(138,138,150,0.2); }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .cta-box {
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 180px;
+    background: radial-gradient(ellipse, rgba(200,240,71,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-box h2 {
+    font-family: var(--font-head);
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .cta-box p {
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    .focus-grid { grid-template-columns: 1fr; }
+    .focus-visual { display: none; }
+    .nav-links { display: none; }
+    .gantt-section .gantt-demo { display: none; }
+    .process-step { border-right: 1px solid var(--border); border-bottom: none; }
+    .process-step:last-child { border-bottom: 1px solid var(--border); }
+    .cta-box { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">PIXEL<span>.</span>CODES</a>
+  <ul class="nav-links">
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#foco">Especialidades</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#gestao">Gestão</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Fale conosco</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Software sob medida</div>
+  <h1>
+    Código que<br>
+    <em>transforma</em><br>
+    negócios.
+  </h1>
+  <p>Desenvolvemos aplicativos, sites e sistemas de gestão que se adaptam à realidade da sua empresa — com precisão, agilidade e tecnologia de ponta.</p>
+  <div class="hero-actions">
+    <a href="#produtos" class="btn-primary">Conheça nossas soluções →</a>
+    <a href="#contato" class="btn-outline">Falar com especialista</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <div class="stat-num">10<span>+</span></div>
+    <div class="stat-label">Anos de experiência</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">80<span>+</span></div>
+    <div class="stat-label">Projetos entregues</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">98<span>%</span></div>
+    <div class="stat-label">Satisfação dos clientes</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">3<span>x</span></div>
+    <div class="stat-label">Redução de custos operacionais</div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<section id="produtos">
+  <div class="section-inner">
+    <span class="section-tag reveal">O que fazemos</span>
+    <h2 class="section-title reveal">Soluções completas<br>em software</h2>
+    <p class="section-sub reveal">Do conceito ao código, desenvolvemos produtos digitais que resolvem problemas reais com elegância e eficiência.</p>
+
+    <div class="products-grid reveal">
+      <div class="product-card">
+        <div class="product-icon icon-green">📱</div>
+        <h3>Aplicativos personalizados</h3>
+        <p>Desenvolvemos aplicativos mobile e web sob medida, desde a concepção do design até o deploy em produção. Cada detalhe pensado para o seu usuário final.</p>
+        <div class="product-tags">
+          <span class="tag">iOS & Android</span>
+          <span class="tag">React Native</span>
+          <span class="tag">Web App</span>
+          <span class="tag">API REST</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon icon-yellow">🌐</div>
+        <h3>Desenvolvimento de sites</h3>
+        <p>Sites institucionais, landing pages e portais digitais com foco em performance, SEO e experiência do usuário. Presença digital que gera resultados.</p>
+        <div class="product-tags">
+          <span class="tag">Landing Page</span>
+          <span class="tag">Institucional</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">SEO</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon icon-blue">🎯</div>
+        <h3>Consultoria e acompanhamento</h3>
+        <p>Análise técnica, planejamento estratégico e acompanhamento contínuo de projetos. Estamos do lado do cliente em cada etapa da jornada digital.</p>
+        <div class="product-tags">
+          <span class="tag">Diagnóstico</span>
+          <span class="tag">Roadmap</span>
+          <span class="tag">Mentoria técnica</span>
+          <span class="tag">Suporte</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCO -->
+<section id="foco" class="focus-section">
+  <div class="section-inner">
+    <div class="focus-grid">
+      <div class="focus-content">
+        <span class="section-tag reveal">Especialidade</span>
+        <h2 class="section-title reveal">Sistemas de gestão<br>que fazem a diferença</h2>
+        <p class="section-sub reveal" style="margin-bottom: 0;">Nossa experiência é aprofundada em três pilares críticos para operações empresariais eficientes.</p>
+
+        <ul class="focus-list reveal">
+          <li>
+            <div class="focus-list-icon">📦</div>
+            <div>
+              <h4>Gestão de estoques</h4>
+              <p>Controle em tempo real de entradas, saídas, saldo e validade. Alertas automáticos e relatórios de giro de mercadoria.</p>
+            </div>
+          </li>
+          <li>
+            <div class="focus-list-icon">🏭</div>
+            <div>
+              <h4>Almoxarifado</h4>
+              <p>Rastreabilidade completa de materiais, requisições, devoluções e movimentações internas. Integração com fornecedores e compras.</p>
+            </div>
+          </li>
+          <li>
+            <div class="focus-list-icon">📊</div>
+            <div>
+              <h4>Controle de tarefas e projetos (Gantt)</h4>
+              <p>Planejamento visual com gráficos Gantt, alocação de equipes, dependências entre atividades e acompanhamento de prazos.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="focus-visual reveal">
+        <div class="focus-dashboard">
+          <div class="dash-header">
+            <span class="dash-title">Painel de estoque</span>
+            <span class="dash-badge">TEMPO REAL</span>
+          </div>
+
+          <div class="dash-metrics">
+            <div class="dash-metric">
+              <div class="dash-metric-val" style="color: var(--accent2);">1.847</div>
+              <div class="dash-metric-lbl">Itens em estoque</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-val" style="color: var(--accent);">R$ 284k</div>
+              <div class="dash-metric-lbl">Valor total</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-val" style="color: #FF6B6B;">12</div>
+              <div class="dash-metric-lbl">Abaixo do mínimo</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-val" style="color: var(--accent3);">98%</div>
+              <div class="dash-metric-lbl">Acuracidade</div>
+            </div>
+          </div>
+
+          <div class="dash-bar-group">
+            <div class="dash-bar-label"><span>Matéria-prima</span><span>78%</span></div>
+            <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 78%; background: var(--accent2);"></div></div>
+          </div>
+          <div class="dash-bar-group">
+            <div class="dash-bar-label"><span>Produto acabado</span><span>64%</span></div>
+            <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 64%;"></div></div>
+          </div>
+          <div class="dash-bar-group">
+            <div class="dash-bar-label"><span>Embalagens</span><span>41%</span></div>
+            <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 41%; background: var(--accent3);"></div></div>
+          </div>
+
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qtd</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Parafuso M8</td>
+                <td>2.340</td>
+                <td><span class="status-badge status-ok">OK</span></td>
+              </tr>
+              <tr>
+                <td>Luva nitrilo G</td>
+                <td>180</td>
+                <td><span class="status-badge status-warn">Atenção</span></td>
+              </tr>
+              <tr>
+                <td>Cabo PP 4x2.5</td>
+                <td>14m</td>
+                <td><span class="status-badge status-low">Baixo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GANTT / GESTÃO -->
+<section id="gestao" class="gantt-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">Controle de projetos</span>
+    <h2 class="section-title reveal">Visualize cada etapa.<br>Cumpra cada prazo.</h2>
+    <p class="section-sub reveal">Nossos sistemas de gerenciamento incluem gráficos Gantt interativos para que sua equipe saiba exatamente onde cada projeto está — e para onde vai.</p>
+
+    <div class="gantt-demo reveal">
+      <div class="gantt-header">
+        <span class="gantt-title">Projeto: Implantação ERP</span>
+        <span class="gantt-period">Jan — Jun 2025</span>
+      </div>
+
+      <div class="gantt-grid">
+        <div class="gantt-months">
+          <div></div>
+          <div class="gantt-month-cell">Jan</div>
+          <div class="gantt-month-cell">Fev</div>
+          <div class="gantt-month-cell">Mar</div>
+          <div class="gantt-month-cell">Abr</div>
+          <div class="gantt-month-cell">Mai</div>
+          <div class="gantt-month-cell">Jun</div>
+        </div>
+
+        <!-- Row 1 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Levantamento de requisitos</div>
+          <div class="gantt-cells">
+            <div style="grid-column: 1 / 3;" class="gantt-bar bar-green">Levantamento</div>
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Design & Prototipação</div>
+          <div class="gantt-cells">
+            <div></div>
+            <div style="grid-column: 2 / 4;" class="gantt-bar bar-yellow">Design</div>
+            <div></div><div></div><div></div>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Desenvolvimento backend</div>
+          <div class="gantt-cells">
+            <div></div><div></div>
+            <div style="grid-column: 3 / 6;" class="gantt-bar bar-blue">Desenvolvimento</div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Desenvolvimento frontend</div>
+          <div class="gantt-cells">
+            <div></div><div></div><div></div>
+            <div style="grid-column: 4 / 7;" class="gantt-bar bar-blue">Frontend</div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Testes e homologação</div>
+          <div class="gantt-cells">
+            <div></div><div></div><div></div><div></div>
+            <div style="grid-column: 5 / 7;" class="gantt-bar bar-yellow">Testes</div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="gantt-row">
+          <div class="gantt-label">Deploy & treinamento</div>
+          <div class="gantt-cells">
+            <div></div><div></div><div></div><div></div><div></div>
+            <div style="grid-column: 6;" class="gantt-bar bar-green">Go-live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="section-inner">
+    <span class="section-tag reveal">Como trabalhamos</span>
+    <h2 class="section-title reveal">Do briefing ao<br>deploy com clareza.</h2>
+    <p class="section-sub reveal">Um processo transparente e colaborativo, pensado para entregar valor em cada fase do projeto.</p>
+
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Descoberta</h4>
+        <p>Entendemos seu negócio, mapeamos os processos e identificamos as maiores oportunidades de impacto.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Planejamento</h4>
+        <p>Definimos escopo, tecnologias, cronograma e métricas de sucesso. Nada começa sem alinhamento total.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Desenvolvimento</h4>
+        <p>Sprints ágeis com entregas incrementais, revisões constantes e comunicação direta com o cliente.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Entrega & suporte</h4>
+        <p>Deploy seguro, treinamento da equipe e acompanhamento pós-lançamento para garantir a estabilidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contato" class="cta-section">
+  <div class="cta-box reveal">
+    <div class="cta-glow"></div>
+    <h2>Pronto para<br>começar?</h2>
+    <p>Conte-nos sobre seu projeto e descubra como a PIXEL CODES pode transformar sua operação.</p>
+    <div class="cta-actions">
+      <a href="mailto:contato@pixelcodes.com.br" class="btn-primary">Enviar mensagem →</a>
+      <a href="https://wa.me/55" class="btn-outline">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">PIXEL<span>.</span>CODES</div>
+    <ul class="footer-links">
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#foco">Especialidades</a></li>
+      <li><a href="#processo">Processo</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Pixel Codes. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Nav active scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.borderBottomColor = window.scrollY > 60
+      ? 'rgba(255,255,255,0.1)'
+      : 'rgba(255,255,255,0.07)';
+  });
+</script>
+</body>
+</html>
